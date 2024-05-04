@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyber Space</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="welcome-page">
+    <div class="title">Cyber Space</div>
+    <div class="time" id="time"></div>
+</div>
+
+<div class="content">
+    <div class="navbar">
+        <a href="#" onclick="showCalculator()">Calculator</a>
+        <a href="#" onclick="showNotes()">Notes Page</a>
+        <a href="https://www.netflix.com/browse">Netflix</a>
+    </div>
+
+    <div class="calculator active">
+        <div class="calculator-title">Basic Calculator</div>
+        <input type="text" id="display" disabled><br>
+        <div class="row">
+            <input type="button" value="7" onclick="addToDisplay('7')">
+            <input type="button" value="8" onclick="addToDisplay('8')">
+            <input type="button" value="9" onclick="addToDisplay('9')">
+            <input type="button" value="/" onclick="addToDisplay('/')">
+        </div>
+        <div class="row">
+            <input type="button" value="4" onclick="addToDisplay('4')">
+            <input type="button" value="5" onclick="addToDisplay('5')">
+            <input type="button" value="6" onclick="addToDisplay('6')">
+            <input type="button" value="x" onclick="addToDisplay('*')">
+        </div>
+        <div class="row">
+            <input type="button" value="1" onclick="addToDisplay('1')">
+            <input type="button" value="2" onclick="addToDisplay('2')">
+            <input type="button" value="3" onclick="addToDisplay('3')">
+            <input type="button" value="-" onclick="addToDisplay('-')">
+        </div>
+        <div class="row">
+            <input type="button" value="0" onclick="addToDisplay('0')">
+            <input type="button" value="." onclick="addToDisplay('.')">
+            <input type="button" value="=" onclick="calculate()">
+            <input type="button" value="+" onclick="addToDisplay('+')">
+        </div>
+        <div class="row">
+            <input type="button" value="C" onclick="clearDisplay()">
+        </div>
+    </div>
+
+    <div class="notes">
+        <div class="container">
+            <h1 class="title has-text-centered">Notes Page</h1>
+            <div class="clock" id="clock"></div>
+            <div class="field">
+                <div class="control">
+                    <textarea id="diary-entry" class="textarea" placeholder="Write your note here..." spellcheck="true"></textarea>
+                </div>
+            </div>
+            <div class="field is-grouped is-grouped-centered">
+                <div class="control">
+                    <button class="button is-primary" onclick="addBoldText()">Bold</button>
+                </div>
+                <div class="control">
+                    <button class="button is-primary" onclick="addEntry()">Save Note</button>
+                </div>
+            </div>
+            <div class="entries" id="entries">
+                <!-- Entries will be added here dynamically -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showCalculator() {
+        document.querySelector('.calculator').classList.add('active');
+        document.querySelector('.notes').classList.remove('active');
+    }
+
+    function showNotes() {
+        document.querySelector('.notes').classList.add('active');
+        document.querySelector('.calculator').classList.remove('active');
+    }
+
+    function addToDisplay(value) {
+        document.getElementById("display").value += value;
+    }
+
+    function clearDisplay() {
+        document.getElementById("display").value = '';
+    }
+
+    function calculate() {
+        var result = eval(document.getElementById("display").value);
+        document.getElementById("display").value = result;
+    }
+</script>
+
+<script>
+    function updateTime() {
+        var now = new Date();
+        var timeString = now.toLocaleTimeString();
+        document.getElementById("time").innerText = timeString;
+    }
+
+    // Update time every second
+    setInterval(updateTime, 1000);
+</script>
+
+</body>
+</html>
