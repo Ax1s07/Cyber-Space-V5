@@ -295,14 +295,37 @@
         return new Date(dateString).toLocaleDateString('en-US', options);
     }
 
-    function updateClock() {
-        var now = new Date();
-        var hours = now.getHours();
-        var minutes = now.getMinutes();
-        var seconds = now.getSeconds();
-        var meridian = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12 || 12;
-        document.getElementById('clock').textContent = padZero(hours) + ':' + padZero(minutes) + ':' + padZero(seconds) + ' ' + meridian;
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Time Clock</title>
+</head>
+<body onload="updateClock()">
+    <div id="clock"></div>
+
+    <script>
+        function updateClock() {
+            var now = new Date();
+            var offset = now.getTimezoneOffset(); // Get the time zone offset in minutes
+            now.setMinutes(now.getMinutes() - offset); // Adjust the time with the offset
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+            var meridian = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            document.getElementById('clock').textContent = padZero(hours) + ':' + padZero(minutes) + ':' + padZero(seconds) + ' ' + meridian;
+            setTimeout(updateClock, 1000); // Update every second
+        }
+
+        function padZero(num) {
+            return (num < 10 ? '0' : '') + num;
+        }
+    </script>
+</body>
+</html>
+
     }
 
     function padZero(num) {
